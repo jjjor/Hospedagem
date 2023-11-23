@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Listagem de Hospedagens</title>
+    <a href="{% url 'criar' %}"><button type="button" id="new_hospedage" class="btn btn-success">Nova hospedagem</button></a>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+
+            
+        }
+        th {
+            background-color: #52AC6C;
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        #new_hospedage {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+
+        #actions {
+            width: 400px;
+        }
+
+        #act-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h2>Listagem de Hospedagens</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Data de Entrada:</th>
+                <th>Data de Saída:</th>
+                <th>Valor:</th>
+                <th>Cliente:</th>
+                <th>Quarto:</th>
+                
+                <th id="actions">Ações</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for hospedagem in hospedagens %}
+            <tr>
+                <td>{{ hospedagem.data_entrada }}</td>
+                <td>{{ hospedagem.data_saida }}</td>
+                <td>{{ hospedagem.valor }}</td>
+                <td>{{ hospedagem.cliente }}</td>
+                <td>{{ hospedagem.quarto }}</td>
+                <td id="act-buttons"><a href="{% url 'editar' hospedagem.id %}"><button type="button" class="btn btn-primary">Editar</button></a>
+                    <a href="{% url 'detalhar' hospedagem.id %}"><button type="button" class="btn btn-info">Detalhar</button></a>
+                    <a href="{% url 'deletar' hospedagem.id %}"><button type="button" class="btn btn-danger">Remover</button></a></td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
